@@ -1,0 +1,47 @@
+<div class="game-container">
+    <div class="game-header">
+        <h1>Tic Tac Toe</h1>
+    </div>
+    <div class="container">
+        <div class="turn">
+            <ng-container *ngIf="!isGameOver; else gameOverTemplate">
+                <span class="active-turn">{{activeTurn}}</span> <span class="turn-txt">Turn</span>
+            </ng-container>
+            <ng-template #gameOverTemplate>
+                <span class="turn-txt">Game Over</span>
+            </ng-template>
+        </div>
+        <div class="box">
+            <ng-container *ngIf="!isGameOver; else gameResultTemplate">
+                <div class="row" *ngFor="let row of board">
+                    <div class="square" *ngFor="let square of row; let j=index" [id]="square.sqNo"
+                        [ngStyle]="{'cursor': square.chk ? 'default' : 'pointer'}" (click)="placeMark(square)"
+                        (mouseenter)="squareMouseEnter(square)" (mouseleave)="squareMouseLeave(square)">
+                        <span class="mark"
+                            [ngClass]="{'mark-placeholder': square.markPlaceholder, 'x-marker': square.chk && square.state === players.x, 'o-marker' : square.chk && square.state === players.o}"
+                            *ngIf="square.state">{{square.state}}</span>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #gameResultTemplate>
+                <div class="game-result" [class.draw]="isGameDraw">
+                    <div class="result-mark" *ngIf="!isGameDraw; else gameDrawTemplate">
+                        <span class="x-marker" *ngIf="gameResult?.state === players.x">{{players.x}}</span>
+                        <span class="o-marker" *ngIf="gameResult?.state === players.o">{{players.o}}</span>
+                    </div>
+                    <ng-template #gameDrawTemplate>
+                        <span class="x-marker">{{players.x}}</span>
+                        <span class="o-marker">{{players.o}}</span>
+                    </ng-template>
+                    <div class="result">
+                        {{gameResult?.result}}
+                    </div>
+                </div>
+            </ng-template>
+            <div class="strike-through" *ngIf="strikePattern" [ngClass]="strikePattern"></div>
+        </div>
+    </div>
+    <div class="game-footer">
+        <button class="reset-game-btn" (click)="resetBoard()">RESTART GAME</button>
+    </div>
+</div>
