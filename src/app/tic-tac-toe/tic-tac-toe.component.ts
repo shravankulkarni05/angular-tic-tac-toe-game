@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameResult, Square } from '../tic-tac-toe.interface';
+declare const bodymovin;
 
 @Component({
   selector: 'app-tic-tac-toe',
@@ -187,10 +188,28 @@ export class TicTacToeComponent implements OnInit {
       setTimeout(() => {
         this.strikePattern = null;
         this.isGameOver = true;
-      }, 800);
+        this.showConfetti();
+      }, 600);
       return true;
     }
     return false;
+  }
+
+  private showConfetti() {
+    const confettiContainer = document.getElementById('confetti');
+    const animItem = bodymovin.loadAnimation({
+      wrapper: confettiContainer,
+      animType: 'svg',
+      loop: false,
+      autoplay: false,
+      path: 'https://assets2.lottiefiles.com/packages/lf20_u4yrau.json',
+    });
+    confettiContainer.classList.remove('hide');
+    animItem.goToAndPlay(0, true);
+    animItem.addEventListener('complete', () => {
+      confettiContainer.removeChild(confettiContainer.childNodes[0]);
+      confettiContainer.classList.add('hide');
+    });
   }
 
   squareMouseEnter(square: Square) {

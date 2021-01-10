@@ -5,6 +5,6 @@ Tic-Tac-Toe-Game In Angular
 
 <img src="src/assets/images/Tic_Tac_Toe.PNG" width="650px">
 <br>
-<img src="src/assets/images/Tic_Tac_Toe_Win.PNG" width="650px">
+<img src="src/assets/images/Tic_Tac_Toe_Win_Confetti.PNG" width="650px">
 <br>
 <img src="src/assets/images/Tic_Tac_Toe_Draw.PNG" width="650px">

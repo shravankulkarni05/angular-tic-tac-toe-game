@@ -192,3 +192,14 @@
     transform: rotate(45deg);
   }
   
+  .confetti {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      pointer-events: none;
+      top: 0;
+  }
+
+  .hide {
+      display: none;
+  }
